@@ -164,35 +164,31 @@ $('document').ready(function(){
 		});
 	});
 	
-	$('#story').click(function(){
-		$(this).fadeOut('slow');
-		$('.cake').fadeOut('fast').promise().done(function(){
-			$('.message').fadeIn('slow');
-		});
-		
-		var i;
+$('#story').click(function () {
+    $(this).fadeOut('slow');
+    $('.cake').fadeOut('fast').promise().done(function () {
+        $('.message').fadeIn('slow');
+    });
 
-		function msgLoop (i) {
-			$("p:nth-child("+i+")").fadeOut('slow').delay(800).promise().done(function(){
-			i=i+1;
-			$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
-			if(i==50){
-				$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
-					$('.cake').fadeIn('fast');
-				});
-				
-			}
-			else{
-				msgLoop(i);
-			}			
+    var i = 0;
 
-		});
-			// body...
-		}
-		
-		msgLoop(0);
-		
-	});
+    function msgLoop(i) {
+        $("p:nth-child(" + i + ")").fadeOut('slow').delay(5000).promise().done(function () {
+            i = i + 1;
+            if (i <= 50) {
+                $("p:nth-child(" + i + ")").fadeIn('slow').delay(1000);
+                msgLoop(i);
+            } else {
+                $("p:nth-child(49)").fadeOut('slow').promise().done(function () {
+                    $('.cake').fadeIn('fast');
+                });
+            }
+        });
+    }
+
+    msgLoop(0);
+});
+
 });
 
 
